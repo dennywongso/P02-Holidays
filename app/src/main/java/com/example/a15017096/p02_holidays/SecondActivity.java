@@ -4,9 +4,12 @@ package com.example.a15017096.p02_holidays;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,6 +18,7 @@ public class SecondActivity extends AppCompatActivity {
     ArrayList<Holiday> alSecular, alEthic;
     ListView lv;
     TextView tvDesc;
+    ArrayList<Holiday> clicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +36,30 @@ public class SecondActivity extends AppCompatActivity {
         alEthic.add(new Holiday("Christmas Day","25 December 2017","christmas_day"));
         alEthic.add(new Holiday("Chinese New Year","28-29 Jan 2017","cny"));
         alEthic.add(new Holiday("Good friday","14 April 2017","good_friday"));
+        clicked = new ArrayList<Holiday>();
 
         if(post == 0){
             tvDesc.setText("Secular");
             aa = new HolidayAdapter(this, R.layout.row, alSecular);
+            clicked = alSecular;
         } else {
             tvDesc.setText("Ethnic & Religion");
             aa = new HolidayAdapter(this, R.layout.row, alEthic);
+            clicked = alEthic;
         }
         lv.setAdapter(aa);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Holiday selectedHol = clicked.get(position);
+
+                Toast.makeText(SecondActivity.this, selectedHol.getName()
+                                + ", Date: " + selectedHol.getDate(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
     }
