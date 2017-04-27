@@ -23,11 +23,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tv10 = (TextView)findViewById(R.id.tv10);
         lv = (ListView)findViewById(R.id.lv1);
         al = new ArrayList<String>();
         al.add("Secular");
         al.add("Ethnic & Religion");
-        
+        tv10.setText("Types of Public Holidays in SG");
+
 
         aa = new ArrayAdapter(this, android.R.layout.simple_list_item_1, al);
         lv.setAdapter(aa);
